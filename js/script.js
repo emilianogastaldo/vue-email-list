@@ -7,22 +7,28 @@ const app = createApp({
     name: 'Email List',
     data: () => ({
         prova: 'Prova vue',
-        emailList: []
+        emailList: [],
+        inputNumber: ''
     }),
+    computed: {
+        maxNumber() {
+            return parseInt(this.inputNumber);
+        }
+    },
     methods: {
         // Metodo per creare una email e metterla nella lista
         getEmail() {
-            axios.get(endpoint).then((res) => {
-                const email = res.data;
-                this.emailList.push(email);
-            })
+            for (let i = 0; i < this.maxNumber; i++) {
+                axios.get(endpoint).then((res) => {
+                    const email = res.data;
+                    this.emailList.push(email);
+                })
+            }
+        },
+        generateList() {
+            this.emailList = [];
+            this.getEmail();
         }
-    },
-    created() {
-        for (let i = 0; i < 10; i++) {
-            this.getEmail()
-        }
-        console.log('lista di email', this.emailList);
     }
 });
 

@@ -19,7 +19,14 @@
 
 <body>
     <div id="root">
-        <p>{{prova}}</p>
+        <input type="number" placeholder="Quante email vuoi?" v-model.trim="inputNumber">
+        <button @click="generateList"> Crea Email</button>
+        <div v-if="emailList.length < maxNumber">IN CARICAMENTO</div>
+        <ul v-else>
+            <li v-for="email in emailList">
+                {{email.response}}
+            </li>
+        </ul>
     </div>
 </body>
 
