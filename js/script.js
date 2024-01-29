@@ -9,12 +9,18 @@ const app = createApp({
         prova: 'Prova vue',
         emailList: []
     }),
-    created() {
-        for (let i = 0; i < 10; i++) {
+    methods: {
+        // Metodo per creare una email e metterla nella lista
+        getEmail() {
             axios.get(endpoint).then((res) => {
                 const email = res.data;
                 this.emailList.push(email);
             })
+        }
+    },
+    created() {
+        for (let i = 0; i < 10; i++) {
+            this.getEmail()
         }
         console.log('lista di email', this.emailList);
     }
