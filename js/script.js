@@ -10,12 +10,13 @@ const app = createApp({
         emailList: []
     }),
     created() {
-        axios.get(endpoint).then((res) => {
-            const email = res.data;
-            this.emailList.push(email);
-        })
+        for (let i = 0; i < 10; i++) {
+            axios.get(endpoint).then((res) => {
+                const email = res.data;
+                this.emailList.push(email);
+            })
+        }
         console.log('lista di email', this.emailList);
-
     }
 });
 
