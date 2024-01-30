@@ -18,16 +18,19 @@ const app = createApp({
     methods: {
         // Metodo per creare una email e metterla nella lista
         getEmail() {
+            axios.get(endpoint).then((res) => {
+                const email = res.data;
+                this.emailList.push(email);
+            })
+        },
+        fetchEmails() {
             for (let i = 0; i < this.maxNumber; i++) {
-                axios.get(endpoint).then((res) => {
-                    const email = res.data;
-                    this.emailList.push(email);
-                })
+                this.getEmail()
             }
         },
         generateList() {
             this.emailList = [];
-            this.getEmail();
+            this.fetchEmails();
         }
     }
 });
